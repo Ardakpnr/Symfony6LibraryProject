@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %}Admin Sayfası{% endblock %}</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{{ asset('assets') }}/Admin//vendors/typicons.font/font/typicons.css">
+  <link rel="stylesheet" href="{{ asset('assets') }}/Admin/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{{ asset('assets') }}/Admin/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{{ asset('assets') }}/Admin/images/favicon.png" />
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+    {% include 'admin/home/header.html.twig' %}
+    
+    {% block sidebar %} {% include 'admin/home/sidebar.html.twig' %} {% endblock %}
+    {% block content %}{% endblock %}
+    {% include 'admin/home/footer.html.twig' %}
+{% block foot %}{% endblock %}
+</body>
+
+</html>
