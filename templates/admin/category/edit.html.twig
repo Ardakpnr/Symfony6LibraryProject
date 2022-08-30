@@ -1,7 +1,5 @@
 {% extends 'adminbase.html.twig' %}
-{% block title  %}
-	new Category
-{% endblock %}
+{% block title  %}Edit Category{% endblock %}
 
 {% block content %}
 	<!-- partial -->
@@ -12,35 +10,36 @@
 					<div class="col-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title">Basic form elements</h4>
+								<h4 class="card-title">Edit Category Form</h4>
 								<p class="card-description">
 									Basic form elements
 								</p>
-								<form action="{{ path('app_admin_category_save') }}" class="forms-sample" method="post">
+								<form action="{{ path('app_admin_category_update',{ 'id': rs.id  }) }}" class="forms-sample" method="post">
 									<div class="form-group">
 										<label for="exampleInputName1">parent</label>
-										<input type="text" class="form-control" name="parent_id">
+										<input type="text" class="form-control" name="parent_id" value="{{ rs.parentid }}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail3">title</label>
-										<input type="text" class="form-control" id="exampleInputEmail3" name="title">
+										<input type="text" class="form-control" id="exampleInputEmail3" name="title" value="{{ rs.title }}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">keywords</label>
-										<input type="text" class="form-control" id="exampleInputPassword4" name="keywords">
+										<input type="text" class="form-control" id="exampleInputPassword4" name="keywords" value="{{ rs.keywords }}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">description</label>
-										<input type="text" class="form-control" id="exampleInputPassword4" name="description">
+										<input type="text" class="form-control" id="exampleInputPassword4" name="description" value="{{ rs.description }}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">slug</label>
-										<input type="text" class="form-control" id="exampleInputPassword4" name="slug">
+										<input type="text" class="form-control" id="exampleInputPassword4" name="slug" value="{{ rs.status }}">
 
 									</div>
 									<div class="form-group">
-										<label for="exampleSelectGender">status</label>
+										<label for="exampleSelectGender">Status</label>
 										<select class="form-control" id="exampleSelectGender" name="status">
+											<option select="{{ rs.status }}"></option>
 											<option>True</option>
 											<option>False</option>
 										</select>
