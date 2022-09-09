@@ -29,7 +29,10 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $messageRepository->add($message, true);
-
+            $this->addFlash(
+                'success',
+                'Mesajınız başarı ile kayıt edilmiştir. Teşekkür ederiz'
+            );
             return $this->redirectToRoute('app_contact');
         }
         return $this->renderForm('home/contact.html.twig', [

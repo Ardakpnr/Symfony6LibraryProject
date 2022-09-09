@@ -1,0 +1,61 @@
+{% extends 'adminbase.html.twig' %}
+{% block title  %}Contact Mesajları{% endblock %}
+{% block content %}
+	<!-- partial -->
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="col-lg-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">
+							Contact Messages</h4>
+						
+						<div class="table-responsive"></div>
+						<div class="card">
+							<div class="card-body">
+
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Phone</th>
+												<th>Subject</th>
+												<th>Message</th>
+												<th>Show</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for rs in messagelist %}
+												<tr>
+													<td>{{ rs.id }}</td>
+													<td>{{ rs.name }}</td>
+													<td>{{ rs.email }}</td>
+													<td>{{ rs.phone }}</td>
+													<td>{{ rs.subject }}</td>
+													<td>{{ rs.message }}</td>
+													<td>{{ rs.status }}</td>
+													
+													<td>
+														<a href="{{ path('app_admin_messages_show',{'id': rs.id })}}" class="badge badge-danger">Show
+														</a>
+													</td>
+													<td>
+														<a href="{{ path('app_admin_messages_delete',{'id': rs.id }) }}" class="badge badge-danger" onclick="return confirm ('Silmek istediğinize emin misiniz ?');">Delete
+														</a>
+													</td>
+												</tr>
+											{% endfor %}
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endblock %}

@@ -17,13 +17,24 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('name',  TextType::class, [
-                'attr' => ['autofocus' => true, 'class'=>'input']
+                'attr' => ['autofocus'=> true, 'class' => 'form-control'],
+                
             ])
-            ->add('email', EmailType::class)
-            ->add('phone', TextType::class)
-            ->add('subject', TextType::class)
-            ->add('message', TextareaType::class)
-            ->add('Gonder', SubmitType::class)
+            ->add('email', EmailType::class,[
+                'attr' => ['autofocus'=> true, 'class' => 'form-control']
+            ])
+            ->add('phone', TextType::class,[
+                'attr' => ['autofocus'=> true, 'class' => 'form-control']
+            ])
+            ->add('subject', TextType::class,[
+                'attr' => ['autofocus'=> true, 'class' => 'form-control']
+            ])
+            ->add('message', TextareaType::class,[
+                'attr' => ['autofocus'=> true, 'class' => 'form-control']
+            ])
+            ->add('Gonder', SubmitType::class,[
+                'attr' => ['autofocus'=> true, 'class' => 'btn btn-primary py-2 px-4']
+            ])
         ;
     }
 

@@ -28,6 +28,9 @@ class Message
     #[ORM\Column(length: 255)]
     private ?string $message = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $status = 'New';
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Message
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
