@@ -2,7 +2,11 @@
 
 {% block title %}Product List
 {% endblock %}
-
+{% block head %}
+<SCRIPT language="JavaScript" type="text/javascript">
+	function openWin( windowURL, windowName, windowFeatures) { window.open( windowURL, windowName, windowFeatures);}
+</SCRIPT>
+{% endblock %}
 {% block body %}
 	<div class="main-panel">
 		<div class="content-wrapper">
@@ -11,10 +15,6 @@
 					<div class="card-body">
 						<h4 class="card-title">
 							Product List</h4>
-						<button>
-							<a href="{{ path('app_admin_category_new') }}">Add
-							</a>
-						</button>
 
 						<div class="table-responsive"></div>
 						<div class="card">
@@ -26,9 +26,11 @@
 										<thead>
 											<tr>
 												<th>Id</th>
+												<th>Category</th>
 												<th>Title</th>
 												<th>Keywords</th>
 												<th>Image</th>
+												<th>IGallery</th>
 												<th>Price</th>
 												<th>Quantiy</th>
 												<th>Status</th>
@@ -39,10 +41,16 @@
 											{% for product in products %}
 												<tr>
 													<td>{{ product.id }}</td>
+													<td>{{ product.category.title }}</td>
 													<td>{{ product.title }}</td>
 													<td>{{ product.keywords }}</td>
 													<td>
                                                         <img src="{{ asset ('uploads/images/' ~ product.image) }}" style="height:100px; width:100px">
+                                                    </td>
+													<td>
+														<a href="javascript:openWin('{{ path('app_admin_image_new', {'pid': product.id})}}','', 'toolbar=no, location=no, directories=0, status=no, top=50, left=100, menuBar=no, scrollBars=yes, resizable=no, width=900, height=600')">
+														<img src="{{ asset('assets/admin/images') }}/galleryimg.png" height="100px" width:"100px" title="Image Gallery"
+                                                        
                                                     </td>
 													<td>{{ product.price }}</td>
 													<td>{{ product.quantiy }}</td>

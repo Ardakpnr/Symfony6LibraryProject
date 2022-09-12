@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +21,13 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('category', EntityType::class, [
+                'attr' =>['autofocus' => true, 'class' =>'input'],
+                'class' => Category::class,
+                'choice_label' => function(Category $rs){
+                    return sprintf('(%d) %s', $rs->getId(),$rs->getTitle() );
+                }
+            ])
             ->add('title', TextType::class,[
                 'attr' =>['autofocus' => true, 'class' =>'input'],
                 
@@ -34,10 +44,13 @@ class ProductType extends AbstractType
             //     'attr' =>['autofocus' => true, 'class' =>'input'],
                 
             // ])
-            ->add('detail',TextType::class,[
-                'attr' =>['autofocus' => true, 'class' =>'input'],
+            ->add('detail', CKEditorType::class, array(
+                'config'=> array(
+                    'uiColor'=> '#ffffff',
+                    'toolbar' =>'full',
+                ),
                 
-            ])
+            ))
             ->add('price', NumberType::class,[
                 'attr' =>['autofocus' => true, 'class' =>'input'],
                 
@@ -49,6 +62,7 @@ class ProductType extends AbstractType
                 'choices'  => [
                     'True' => 'True',
                     'False' => 'False',
+                    
                 ],
             ])
             ->add('image', FileType::class, [
