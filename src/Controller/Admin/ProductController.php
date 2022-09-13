@@ -64,7 +64,6 @@ class ProductController extends AbstractController
                 $product->setImage($this->uploadimage($imageFile, $slugger));
             }
             
-
             $productRepository->add($product, true);
 
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);

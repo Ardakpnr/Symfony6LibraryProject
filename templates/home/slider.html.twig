@@ -41,8 +41,8 @@
 			<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
 				<div class="navbar-nav mr-auto py-0">
 					<a href="{{ path('app_home')}}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ path('app_aboutus')}}" class="nav-item nav-link">Hakımızda</a>
-                    <a href="{{ path('app_reference')}}" class="nav-item nav-link">Referanslarımız</a>
+					<a href="{{ path('app_aboutus')}}" class="nav-item nav-link">Hakımızda</a>
+					<a href="{{ path('app_reference')}}" class="nav-item nav-link">Referanslarımız</a>
 					<a href="shop.html" class="nav-item nav-link">Shop</a>
 					<a href="detail.html" class="nav-item nav-link">Shop Detail</a>
 					<div class="nav-item dropdown">
@@ -53,12 +53,28 @@
 						</div>
 					</div>
 					<a href="{{ path('app_contact')}}" class="nav-item nav-link">Contact</a>
-                    <a href="{{ path('app_sss')}}" class="nav-item nav-link">SSS</a>
+					<a href="{{ path('app_sss')}}" class="nav-item nav-link">SSS</a>
 				</div>
 				<div class="navbar-nav ml-auto py-0">
-					<a href="" class="nav-item nav-link">Login</a>
-					<a href="" class="nav-item nav-link">Register</a>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<div class="nav-item dropdown">
+							<a href="#" class="nav-link" data-toggle="dropdown">
+									<i class="fa fa-angle-down float-right mt-1"></i>
+								<strong>
+									{{ app.user.name }}
+								</strong>
+							</a>
+							<div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+								<a href="{{ path('app_logout')}}" class="dropdown-item">Logout</a>
+								<a href="" class="dropdown-item">Women's Dresses</a>
+							</div>
+						</div>
+					{% else %}
+						<a href="{{ path('app_login')}}" class="nav-item nav-link">Login</a>
+						<a href="{{ path('app_register')}}" class="nav-item nav-link">Register</a>
+					{% endif %}
 				</div>
+
 			</div>
 		</nav>
 

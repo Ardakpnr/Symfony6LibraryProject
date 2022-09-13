@@ -1,0 +1,77 @@
+{% extends 'homebase.html.twig' %}
+
+
+{% block title %}
+{% endblock%}
+
+
+{% block sidebar %}
+	{% include 'home/sidebar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+	<!-- Contact Start -->
+	<div class="container-fluid pt-2">
+		<div class="text-center mb-4">
+			<h2 class="section-title px-5">
+				<span class="px-2">User</span>
+			</h2>
+		</div>
+		<div class="row">
+			{% include 'usermenu.html.twig' %}
+		</div>
+		<div class="row px-xl-5">
+			<div class="col-lg-7 mb-5">
+				<div class="contact-form">
+					<div id="success"></div>
+
+				</div>
+			</div>
+			<div class="col-lg-5 mb-5">
+				<h5 class="font-weight-semi-bold mb-3">Profil Bilgileri</h5>
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>Id</th>
+							<td>{{ user.id }}</td>
+						</tr>
+						<tr>
+							<th>Email</th>
+							<td>{{ user.email }}</td>
+						</tr>
+						<tr>
+							<th>Roles</th>
+							<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+						</tr>
+						<tr>
+							<th>Password</th>
+							<td>{{ user.password }}</td>
+						</tr>
+						<tr>
+							<th>IsVerified</th>
+							<td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+						</tr>
+						<tr>
+							<th>Name</th>
+							<td>{{ user.name }}</td>
+						</tr>
+						<tr>
+							<th>Image</th>
+							<td>{{ user.image }}</td>
+						</tr>
+						<tr>
+							<th>Phone</th>
+							<td>{{ user.phone }}</td>
+						</tr>
+						<tr>
+							<th>Address</th>
+							<td>{{ user.address }}</td>
+						</tr>
+					</tbody>
+				</table>
+				<a href="{{ path('app_user_edit', {'id': product.id}) }}" style="margin-bottom: 5px;" class="btn btn-success">edit</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Contact End -->{% endblock %}

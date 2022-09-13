@@ -1,6 +1,6 @@
 {% extends 'homebase.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Yetki Hatası
 {% endblock %}
 
 {% block sidebar %}
@@ -11,14 +11,17 @@
 	<div class="container-fluid pt-5">
 		<div class="text-center mb-4">
 			<h2 class="section-title px-5">
-				<span class="px-2">Login</span>
+				<span class="px-2">Yetki Hatası</span>
 			</h2>
 		</div>
 		<div class="row px-xl-5">
 			<div class="col-lg-8 mb-5">
 				<div class="contact-form">
 					<div id="success"></div>
-
+                        <h1>Yetki Hatası</h1>
+                        Girmeye Çalıştığınız yere yetkiniz bulunmamaktadır<br>
+                        lütfen farklı bir kulanıcı ile tekrar deneyiniz<br>
+                        <a href="{{ path('app_login')}}" class="btn btn-success">Login Ol</a>
 				</div>
 			</div>
 			<!-- Contact End -->

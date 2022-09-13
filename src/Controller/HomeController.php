@@ -68,4 +68,12 @@ class HomeController extends AbstractController
             'setting' => $setting
         ]);
     }
+    #[Route('/accessdenied', name: 'app_accessdenied')]
+    public function accessdenied( SettingRepository $settingRepository): Response
+    {
+        $setting= $settingRepository->find(1);
+        return $this->renderForm('home/accessdenied.html.twig', [
+            'setting' => $setting
+        ]);
+    }
 }

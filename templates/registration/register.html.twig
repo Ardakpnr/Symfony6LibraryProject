@@ -1,0 +1,36 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}Register User
+{% endblock %}
+
+{% block sidebar %}
+	{% include 'home/sidebar.html.twig' %}
+{% endblock %}
+{% block content %}
+	<!-- Contact Start -->
+	<div class="container-fluid pt-5">
+		<div class="text-center mb-4">
+			<h2 class="section-title px-5">
+				<span class="px-2">Register User</span>
+			</h2>
+		</div>
+		<div class="row px-xl-5">
+			<div class="col-lg-10 mb-5">
+				<div class="contact-form">
+					<div id="success"></div>
+					{% for flash_error in app.flashes('verify_email_error') %}
+						<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+					{% endfor %}
+
+					<h1>Register User</h1>
+
+					{{ form_start(registrationForm) }}
+					{{ form_widget(registrationForm) }}
+
+					<button type="submit" class="btn btn-success">Register</button>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+			<!-- Contact End -->
+
+		{% endblock %}
