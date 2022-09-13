@@ -1,7 +1,7 @@
 {% extends 'homebase.html.twig' %}
 
 
-{% block title %}
+{% block title %}User Profil
 {% endblock%}
 
 
@@ -17,8 +17,23 @@
 				<span class="px-2">User</span>
 			</h2>
 		</div>
+			
 		<div class="row">
-			{% include 'usermenu.html.twig' %}
+		<div class="col-md-4 mb-5">
+			<h5 class="font-weight-semi-bold mb-3">User Menu</h5>
+				<div class="d-flex flex-column justify-content-start">
+					<a class="text-dark mb-2" href="{{ path('app_user_index')}}">
+						<i class="fa fa-angle-right mr-2"></i>Profil Bilgileri</a>
+					<a class="text-dark mb-2" href="shop.html">
+						<i class="fa fa-angle-right mr-2"></i>Siparişlerim</a>
+					<a class="text-dark mb-2" href="detail.html">
+						<i class="fa fa-angle-right mr-2"></i>Yorumlarım</a>
+					<a class="text-dark mb-2" href="cart.html">
+						<i class="fa fa-angle-right mr-2"></i>Favori Ürünlerim</a>
+					<a class="text-dark mb-2" href="{{ path('app_logout')}}">
+						<i class="fa fa-angle-right mr-2"></i>Logout</a>
+
+				</div>
 		</div>
 		<div class="row px-xl-5">
 			<div class="col-lg-7 mb-5">
@@ -69,7 +84,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<a href="{{ path('app_user_edit', {'id': product.id}) }}" style="margin-bottom: 5px;" class="btn btn-success">edit</a>
+				
 			</div>
 		</div>
 	</div>

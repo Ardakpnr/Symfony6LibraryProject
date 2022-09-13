@@ -4,22 +4,55 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Repository\ImageRepository;
 use App\Repository\MessageRepository;
+use App\Repository\ProductRepository;
 use App\Repository\SettingRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(SettingRepository $settingRepository): Response
+    public function index(ManagerRegistry $doctrine, SettingRepository $settingRepository, ProductRepository $productRepository): Response
     {
         $setting= $settingRepository->find(1);
+        $sliderdata=$productRepository->findAll(2);
+
+        $entityManager = $doctrine->getManager();
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Product p
+            WHERE p.price > :price
+            ORDER BY p.price ASC'
+        )->setParameter('price', 1);
+        
+        // returns an array of Product objects
+        $dailyproduct = $query->getResult();
+        
+        // RAW SQL
+        $conn = $doctrine->getManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM product p
+            WHERE p.price > :price
+            ORDER BY p.price DESC
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['price' => 2]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        $mostproduct = $resultSet->fetchAllAssociative();
+
         return $this->render('home/index.html.twig', [
             'page'=>'home',
             'setting' => $setting,
+            'sliderdata' => $sliderdata,
+            'dailyproduct' => $dailyproduct,
+            'mostproduct' => $mostproduct,
         ]);
     }
 
@@ -74,6 +107,17 @@ class HomeController extends AbstractController
         $setting= $settingRepository->find(1);
         return $this->renderForm('home/accessdenied.html.twig', [
             'setting' => $setting
+        ]);
+    }
+    #[Route('/product/{id}', name: 'app_product')]
+    public function product( ProductRepository $productRepository, ImageRepository $imageRepository, $id): Response
+    {
+        $product= $productRepository->find($id);
+        $images= $imageRepository->findBy(['product_id' => $id]);
+
+        return $this->renderForm('home/product.html.twig', [
+            'product' => $product,
+            'images' => $images,
         ]);
     }
 }
