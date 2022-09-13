@@ -45,10 +45,20 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
 
+
+    #[ORM\OneToMany(mappedBy: 'product_id', targetEntity: ShopCart::class)]
+    private Collection $shopCarts;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ShopCard::class)]
+    private Collection $shopCards;
+
     
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        
+        $this->shopCarts = new ArrayCollection();
+        $this->shopCards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +184,67 @@ class Product
         return $this->images;
     }
 
+    /**
+     * @return Collection<int, ShopCart>
+     */
+    public function getShopCarts(): Collection
+    {
+        return $this->shopCarts;
+    }
+
+    public function addShopCart(ShopCart $shopCart): self
+    {
+        if (!$this->shopCarts->contains($shopCart)) {
+            $this->shopCarts->add($shopCart);
+            $shopCart->setProductId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShopCart(ShopCart $shopCart): self
+    {
+        if ($this->shopCarts->removeElement($shopCart)) {
+            // set the owning side to null (unless already changed)
+            if ($shopCart->getProductId() === $this) {
+                $shopCart->setProductId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ShopCard>
+     */
+    public function getShopCards(): Collection
+    {
+        return $this->shopCards;
+    }
+
+    public function addShopCard(ShopCard $shopCard): self
+    {
+        if (!$this->shopCards->contains($shopCard)) {
+            $this->shopCards->add($shopCard);
+            $shopCard->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShopCard(ShopCard $shopCard): self
+    {
+        if ($this->shopCards->removeElement($shopCard)) {
+            // set the owning side to null (unless already changed)
+            if ($shopCard->getProduct() === $this) {
+                $shopCard->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 
 
 }

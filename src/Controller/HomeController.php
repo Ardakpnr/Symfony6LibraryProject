@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\ShopCart;
 use App\Form\MessageType;
+use App\Form\ShopCartType;
 use App\Repository\ImageRepository;
 use App\Repository\MessageRepository;
 use App\Repository\ProductRepository;
@@ -28,7 +30,7 @@ class HomeController extends AbstractController
             FROM App\Entity\Product p
             WHERE p.price > :price
             ORDER BY p.price ASC'
-        )->setParameter('price', 1);
+        )->setParameter('price', 4);
         
         // returns an array of Product objects
         $dailyproduct = $query->getResult();
@@ -42,7 +44,7 @@ class HomeController extends AbstractController
             ORDER BY p.price DESC
             ';
         $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['price' => 2]);
+        $resultSet = $stmt->executeQuery(['price' => 1]);
 
         // returns an array of arrays (i.e. a raw data set)
         $mostproduct = $resultSet->fetchAllAssociative();
@@ -113,11 +115,13 @@ class HomeController extends AbstractController
     public function product( ProductRepository $productRepository, ImageRepository $imageRepository, $id): Response
     {
         $product= $productRepository->find($id);
-        $images= $imageRepository->findBy(['product_id' => $id]);
-
+        $images= $imageRepository->findBy(['product_id'=>$id]);
+        $shopCart= new ShopCart();
+        $form= $this->createForm(ShopCartType::class, $shopCart);
         return $this->renderForm('home/product.html.twig', [
             'product' => $product,
             'images' => $images,
+            'form' => $form,
         ]);
     }
 }
