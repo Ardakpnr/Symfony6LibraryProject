@@ -45,11 +45,11 @@
 													<td>{{ rs.status }}</td>
 													<td>{{ rs.slug }}</td>
 													<td>
-														<a href="{{ path('app_admin_category_edit',{'id': rs.id })}}" class="badge badge-danger">Edit
+														<a href="{{ path('app_admin_category_edit',{'id': rs.id })}}" class="btn btn-success">Edit
 														</a>
 													</td>
 													<td>
-														<a href="{{ path('app_admin_category_delete',{'id': rs.id }) }}" class="badge badge-danger" onclick="return confirm ('Silmek istediğinize emin misiniz ?');">Delete
+														<a href="{{ path('app_admin_category_delete',{'id': rs.id }) }}" class="btn btn-success" onclick="return confirm ('Silmek istediğinize emin misiniz ?');">Delete
 														</a>
 													</td>
 												</tr>
