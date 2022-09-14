@@ -54,7 +54,7 @@
 			{% for rs in dailyproduct %}
 				<div class="col-lg-2 col-md-6 pb-1">
 					<div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-						<p class="text-right">{{ rs.price * 1.15 }}</p>
+						<p class="text-right">${{ rs.price * 1.15 }}</p>
 						<a href="{{ path('app_product', {'id' : rs.id}) }}" class="cat-img position-relative overflow-hidden mb-3">
 							<img class="img-fluid" src="{{ asset('uploads/images/' ~ rs.image) }}" style="height: 400px" alt="">
 						</a>
@@ -89,7 +89,7 @@
 						<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
 							<h6 class="text-truncate mb-3">{{ rs.title}}</h6>
 							<div class="d-flex justify-content-center">
-								<h6>{{ rs.price * 1.15 }}</h6>
+								<h6>${{ rs.price * 1.15 }}</h6>
 							</div>
 						</div>
 						<div class="card-footer d-flex justify-content-between bg-light border">
@@ -108,26 +108,7 @@
 
 
 <!-- Subscribe Start -->
-<div class="container-fluid bg-secondary my-5">
-	<div class="row justify-content-md-center py-5 px-xl-5">
-		<div class="col-md-6 col-12 py-5">
-			<div class="text-center mb-2 pb-2">
-				<h2 class="section-title px-5 mb-3">
-					<span class="bg-secondary px-2">Stay Updated</span>
-				</h2>
-				<p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo labore labore.</p>
-			</div>
-			<form action="">
-				<div class="input-group">
-					<input type="text" class="form-control border-white p-4" placeholder="Email Goes Here">
-					<div class="input-group-append">
-						<button class="btn btn-primary px-4">Subscribe</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+<hr>
 <!-- Subscribe End -->
 
 
