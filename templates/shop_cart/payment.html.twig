@@ -1,0 +1,87 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}order
+{% endblock %}
+
+{% block sidebar %}
+	{% include 'home/sidebar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+	<!-- Contact Start -->
+	<div class="container-fluid pt-5">
+		<div class="text-center mb-4">
+			<h2 class="section-title px-5">
+				<span class="px-2">Shipping Addres</span>
+			</h2>
+		</div>
+		<div class="row px-xl-5">
+			<div class="col-lg-7 mb-5">
+				<div class="contact-form">
+					<div id="success"></div>
+					{% for label, messages in app.flashes %}
+						{% for message in messages %}
+							<div class="alert alert-{{ label }}">
+								Mesajınız başıryla gönderildi
+							</div>
+						{% endfor %}
+					{% endfor %}
+				</div>
+			</div>
+			<div class="container-fluid pt-5">
+				<form action="{{ path('app_shop_cart_complete') }}" method="post">
+					<div class="col-lg-5 mb-5">
+						<h5 class="font-weight-semi-bold mb-3">İletişim Bilgileri / Kart Bilgileri</h5>
+						<div class="row">
+							<div class="col-md-6 form-group">
+								<label>Name</label>
+								<input class="form-control" name="name" value="{{ app.user.name }}" type="text" placeholder="Name">
+							</div>
+
+							<div class="col-md-6 form-group">
+								<label>Kart Adı</label>
+								<input class="form-control"  name="cardname" type="text" placeholder="Kart Adı">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>E-mail</label>
+								<input class="form-control" name="email" value="{{ app.user.email }}" type="email" placeholder="E-mail">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>Kart no</label>
+								<input class="form-control" name="cardno" type="text" placeholder="Kart no">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>phone</label>
+								<input class="form-control" name="phone" value="{{ app.user.phone }}" type="text" placeholder="phone">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>Son kullanım tarihi</label>
+								<input class="form-control" name="carddate"  type="text" placeholder="Son kullanım tarihi">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>Adres</label>
+								<input class="form-control" name="address" value="{{ app.user.address }}" type="text" placeholder="address">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>Güvenlik Kodu</label>
+								<input class="form-control" name="cardcode" type="text" placeholder="Güvenlik Kodu">
+							</div>
+                            {% set total =0 %}
+                            {% for rs in shop_carts %}
+                            {% set total=total + rs.product.price * rs.quantity %}
+                            {% endfor %}
+							<div class="col-md-6 form-group">
+								<label>Total</label>
+								<input class="form-control" name="total" value="${{ total }}" type="text" placeholder="Total">
+							</div>
+							<div class="col-md-6 form-group">
+								<input class="form-control btn btn-success" type="submit" placeholder="Sipariş ver">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Contact End -->{% endblock %}

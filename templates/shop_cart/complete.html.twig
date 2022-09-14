@@ -1,0 +1,28 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}Order complete
+{% endblock %}
+
+{% block sidebar %}
+	{% include 'home/sidebar.html.twig' %}
+{% endblock %}
+{% block content %}
+	<!-- Contact Start -->
+	<div class="container-fluid pt-5">
+		<div class="text-center mb-4">
+			<h2 class="section-title px-5">
+				<span class="px-2">Satın Alma İşlemi Başarıyla Tamamlandı</span>
+				
+			</h2><br>
+			Kitabınız En Kısa Sürede Teslim Edilecektir
+		</div>
+		<div class="row px-xl-5">
+			<div class="col-lg-8 mb-5">
+				<div class="contact-form">
+					<div id="success"></div>
+
+				</div>
+			</div>
+			<!-- Contact End -->
+
+		{% endblock %}
